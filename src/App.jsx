@@ -3,7 +3,7 @@ import Search from './components/Search'
 import Spinner from './components/Spinner'
 import MovieCard from './components/MovieCard'
 import { useDebounce } from 'react-use'
-import { updateSearchCount } from './appwrite'
+import { getTrendingMovies, updateSearchCount } from './appwrite'
 
 const App = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
@@ -54,9 +54,9 @@ const App = () => {
 
   const loadTrendingMovies = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/discover');
-      const data = await response.json();
-      setTrendingMovies(data.results || []);
+      const movies = await getTrendingMovies();
+
+      setTrendingMovies(movies);
     } catch (error) {
       console.error(`Error fetching trending movies: ${error}`);
     }
@@ -86,7 +86,7 @@ const App = () => {
               {trendingMovies.map((movie, index) => (
                 <li key={movie.id}>
                   <p>{index + 1}</p>
-                  <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+                  <img src={movie.poster_url} alt={movie.searchTerm} />
                 </li>
               ))}
             </ul>

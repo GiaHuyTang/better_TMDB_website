@@ -103,6 +103,44 @@ better_TMDB_website/
 │   └── main.jsx       # Entry point
 └── README.md
 ```
+## 🔌 Appwrite Setup (Optional)
+
+If you'd like to enable search tracking and trending movie suggestions using [Appwrite](https://appwrite.io/), follow these steps:
+
+### 🧱 Backend Setup
+
+1. Create a project on [Appwrite Cloud](https://cloud.appwrite.io/)
+2. Create a **Database** (e.g. `tmdbSearch`)
+3. Inside the database, create a **Collection** (e.g. `searches`) with the following attributes:
+
+| Attribute Name | Type     | Required | Description                        |
+|----------------|----------|----------|------------------------------------|
+| `searchTerm`   | String   | ✅        | The keyword the user searched      |
+| `count`        | Integer  | ✅        | Number of times the term was used |
+| `poster_url`   | String   | ❌        | Poster image URL from TMDB         |
+| `movie_id`     | String   | ❌        | TMDB movie ID                      |
+
+### ⚙️ Frontend Integration
+
+#### 1. Install Appwrite SDK:
+
+```bash
+npm install appwrite
+```
+#### 2. Add the following to your .env file:
+
+```env
+VITE_APPWRITE_PROJECT_ID=your_project_id
+VITE_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
+VITE_APPWRITE_DATABASE_ID=your_database_id
+VITE_APPWRITE_COLLECTION_ID=your_collection_id
+```
+
+Appwrite client is initialized in src/appwrite.js 
+Search tracking logic is handled in src/utils/searchTracker.js 
+You don't need to modify these files unless you're customizing endpoints or logic.
+
+This integration allows the app to track user search terms and recommend movies that are trending based on search frequency. Perfect for adding a smart, data-driven layer to your movie discovery experience.
 
 ## 📄 License
 This project is licensed under the MIT License.

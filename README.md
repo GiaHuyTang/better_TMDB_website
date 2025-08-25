@@ -113,12 +113,12 @@ If you'd like to enable search tracking and trending movie suggestions using [Ap
 2. Create a **Database** (e.g. `tmdbSearch`)
 3. Inside the database, create a **Collection** (e.g. `searches`) with the following attributes:
 
-| Attribute Name | Type     | Required | Description                        |
-|----------------|----------|----------|------------------------------------|
-| `searchTerm`   | String   | ✅        | The keyword the user searched      |
-| `count`        | Integer  | ✅        | Number of times the term was used |
-| `poster_url`   | String   | ❌        | Poster image URL from TMDB         |
-| `movie_id`     | String   | ❌        | TMDB movie ID                      |
+| Attribute Name | Type     | Description                        |
+|----------------|----------|------------------------------------|
+| `searchTerm`   | String   | The keyword the user searched      |
+| `count`        | Integer  | Number of times the term was used  |
+| `poster_url`   | String   | Poster image URL from TMDB         |
+| `movie_id`     | String   | TMDB movie ID                      |
 
 ### ⚙️ Frontend Integration
 
